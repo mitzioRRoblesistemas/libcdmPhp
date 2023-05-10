@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cookie;
-use App\Http\Middleware\CDMAutoriza;
+use Cdmisiones\Libcmd\Middleware\CDMAutoriza;
 use Cdmisiones\Libcmd\ApiOperaciones;
 
 
@@ -55,7 +55,8 @@ class CDMValidacionOTP
                     if ($rta['inStatus'] == 922) {
                         return redirect($rutaError)->with('solicitud', $request->query('solicitud'));
                     }
-                    return CDMAutoriza::handle($request, $next);
+                    return app(CDMAutoriza::class)->handle($request, $next);
+                    
                     
                 } catch (\Exception $exception) {
                     return redirect($rutaError)->with('solicitud', $request->query('solicitud'));

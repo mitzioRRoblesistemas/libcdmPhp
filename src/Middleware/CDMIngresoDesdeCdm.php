@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Cdmisiones\Libcmd\ApiOperaciones;
 use Illuminate\Support\Facades\Log;
-use App\Http\Middleware\CDMAutoriza;
+use Cdmisiones\Libcmd\Middleware\CDMAutoriza;
 
 class CDMIngresoDesdeCdm
 {
@@ -16,7 +16,7 @@ class CDMIngresoDesdeCdm
         try {
             $instanciaSDK = app(ApiOperaciones::class);
             if($request->query('idSesion')){
-                return CDMAutoriza::handle($request, $next);
+                return app(CDMAutoriza::class)->handle($request, $next);
             }
             return $next($request);
         } catch (\Throwable $th) {
