@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
-use Cdmisiones\Libcdm\ApiOperaciones;
+use Cdmisiones\Libcmd\ApiOperaciones;
 
 class CDMGlobal
 {

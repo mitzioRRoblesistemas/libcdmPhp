@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Cookie\CookieJar;
 use Illuminate\Support\Facades\Cookie;
-use Cdmisiones\Libcdm\ApiOperaciones;
+use Cdmisiones\Libcmd\ApiOperaciones;
 
 class CDMCerrarSesion
 {

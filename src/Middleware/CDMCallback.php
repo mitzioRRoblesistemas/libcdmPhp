@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Cdmisiones\Libcdm\ApiOperaciones;
+use Cdmisiones\Libcmd\ApiOperaciones;
 use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\Cookie;

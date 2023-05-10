@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Middleware\CDMAutoriza;
-use Cdmisiones\Libcdm\ApiOperaciones;
+use Cdmisiones\Libcmd\ApiOperaciones;
 
 
 
