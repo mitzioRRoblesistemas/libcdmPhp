@@ -2,14 +2,12 @@
     "name": "cdmisiones/libcmd",
     "description": "Libreria de funciones para el proyecto CDM",
     "type": "library",
-    "version": "1.0.0",
-    "minimum-stability": "stable",
-    "prefer-stable": true,
     "license": "MIT",
     "autoload": {
         "psr-4": {
             "Cdmisiones\\Libcmd\\": "src/"
         }
     },
-    "require": {}
+    "require": {},
+    "minimum-stability": "stable"
 }
