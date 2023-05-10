@@ -16,8 +16,6 @@ class CDMCallback
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            Log::error('ENTRE EN CDM CALLBACK');
-            Log::error('EL TIPO: ', [$request->query('tipo')]);
             $instanciaSDK = app(ApiOperaciones::class);
             if ($request->query('tipo') === 'login') {
                 
@@ -62,9 +60,6 @@ class CDMCallback
                 }
                 return redirect($request->query('origenUri').'?solicitud='.$request->query('solicitud'));
             }
-            
-            
-
             $request->cdm = ['status' => 400,
             'msg' => 'tipo de callback no reconocido',
             'data' => array_merge($request->cdm['data'] ?? [], [
@@ -74,8 +69,7 @@ class CDMCallback
                     'data' => [],
                 ],
                 'origenUri' => $request->query('origenUri'),
-            ]),
-            ];
+            ])];
             return $next($request);
         } catch (Exception $error) {
             $request->cdm['status'] = 500;

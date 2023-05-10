@@ -16,7 +16,6 @@ class CDMGetPerfil
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            Log::info('en get perfil');
             $instanciaSDK = app(ApiOperaciones::class);
             $rta = $instanciaSDK->api_getPerfil($request->cookie("cdm-token"));
             $request->cdm['status'] = $rta['status'];

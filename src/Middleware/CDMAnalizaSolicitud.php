@@ -14,9 +14,7 @@ class CDMAnalizaSolicitud
     {
         try {
             $instanciaSDK = app(ApiOperaciones::class);
-            Log::info('*************************Api getSolicitud: ', [$request->query("solicitud")]);
             $rta = $instanciaSDK->api_getSolicitud($request->cookie("cdm-token"), $request->query("solicitud"));
-            Log::info('*************************Api getSolicitud: ', [$rta]);
 
             $data = collect($rta['data'])->except(["origen", "metodo", "origenUri"])->toArray();
             $analizaSolicitud = [
@@ -34,7 +32,6 @@ class CDMAnalizaSolicitud
                 ];
             
         } catch (\Throwable $th) {
-            Log::error($th->getMessage());
             $request->cdm = 
                 [
                     "status" => 500,

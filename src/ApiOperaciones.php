@@ -233,7 +233,6 @@ class ApiOperaciones{
     
     public function api_validaOTP($token, $origenUri = '/')
     {
-        Log::error('En valida OTP');
         $rta = [
             'status' => 400,
             'data' => ['redirect' => null],
@@ -252,11 +251,9 @@ class ApiOperaciones{
                 'max' => 0,
             ],
             ]);
-            Log::error('respuestaaaa');
-            Log::error($response->getStatusCode());
+
             if ($response->getStatusCode() == 200) {
                 $rta['status'] = 200;
-                Log::error($response->getBody());
                 $rta['msg'] = $response->getBody()->getContents()['msgStatus'];
             } else{
                 $rta['status'] = $response->getStatusCode();
@@ -269,7 +266,6 @@ class ApiOperaciones{
                 }
             }
     } catch (\Exception $e) {
-        Log::error('error', [$e]);
         return $rta;
     }
 

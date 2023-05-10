@@ -15,13 +15,8 @@ class CDMVerificaSesionToken
     {
         try {
             $request->originUrl = $request->fullUrl();
-            
-            Log::info('CDMVerificaSesionToken');
             $instanciaSDK = app(ApiOperaciones::class);
-            Log::info('token:', [$request->cookie('cdm-token')]);
             if($request->cookie('cdm-token')){
-                Log::info('NO TIENE QUE ENTRAR !');
-
                 $rta = $instanciaSDK->api_verificaSesionToken($request->cookie("cdm-token"));
                 if($rta['status'] != 200){
                     return app(CDMAutoriza::class)->handle($request, $next);
@@ -31,19 +26,9 @@ class CDMVerificaSesionToken
                 $request->cdm['idColeccion'] = $rta['data']['idColeccion'];
                 $request->cdm['data'] = array_merge($request->cdm['data'] ?? [],$rta);
                 return $next($request);
-
             }
-            
-
-        // Llamar al middleware B dentro del resultado
-        return app(CDMAutoriza::class)->handle($request, $next);
-
-        // return $next($request);;
-            
-
-
+            return app(CDMAutoriza::class)->handle($request, $next);
         } catch (\Throwable $th) {
-            Log::error($th->getMessage());
             $request->cdm = 
                 [
                     "status" => 500,
@@ -64,6 +49,5 @@ class CDMVerificaSesionToken
                 ];
                 return $next($request);
         }
-        
     }
 }

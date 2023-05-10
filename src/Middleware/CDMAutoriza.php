@@ -15,8 +15,6 @@ class CDMAutoriza
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            Log::info('En autoriza!!!!');
-            
             $instanciaSDK = app(ApiOperaciones::class);
             $session = $request->query('idSesion') ?? $request->cookie('cdm-idSesion');
             $rta = $instanciaSDK->api_autoriza($request->cookie('cdm-keyLogin'), $session, $request->originUrl ?? '/');

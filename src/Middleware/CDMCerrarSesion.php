@@ -31,7 +31,6 @@ class CDMCerrarSesion
             
             return $next($request);
         } catch (\Throwable $th) {
-            Log::info('Error : ', [$th->getMessage()]);
             $request->cdm['status'] = 500;
             $request->cdm['msg'] = $th->getMessage();
             $request->cdm['data']['autoriza'] = [
