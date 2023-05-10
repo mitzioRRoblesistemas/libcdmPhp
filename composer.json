@@ -1,6 +1,8 @@
 {
     "name": "cdmisiones/libcmd",
     "description": "Libreria de funciones para el proyecto CDM",
+    "type": "library",
+    "version": "1.0",
     "autoload": {
         "psr-4": {
             "Cdmisiones\\Libcmd\\": "src/"
