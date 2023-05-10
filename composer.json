@@ -3,6 +3,8 @@
     "description": "Libreria de funciones para el proyecto CDM",
     "type": "library",
     "version": "1.0",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Cdmisiones\\Libcmd\\": "src/"
