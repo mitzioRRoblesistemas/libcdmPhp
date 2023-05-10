@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 
 use Illuminate\Support\Facades\Cookie;
 
-class CDMCallback
+class Callback
 {
     public function handle(Request $request, Closure $next): Response
     {

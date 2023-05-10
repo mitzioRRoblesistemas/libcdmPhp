@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
 use Cdmisiones\Libcmd\ApiOperaciones;
 
-class CDMAnalizaSolicitud
+class AnalizaSolicitud
 {
     public function handle(Request $request, Closure $next): Response
     {

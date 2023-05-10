@@ -5,26 +5,30 @@ namespace Cdmisiones\Libcmd\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Cdmisiones\Libcmd\ApiOperaciones;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Cookie\CookieJar;
+use Illuminate\Support\Facades\Cookie;
+use Cdmisiones\Libcmd\ApiOperaciones;
 
-
-
-class CDMAutoriza
+class CerrarSesion
 {
     public function handle(Request $request, Closure $next): Response
     {
         try {
+            $cookieJar= new CookieJar();
             $instanciaSDK = app(ApiOperaciones::class);
-            $session = $request->query('idSesion') ?? $request->cookie('cdm-idSesion');
-            $rta = $instanciaSDK->api_autoriza($request->cookie('cdm-keyLogin'), $session, $request->originUrl ?? '/');
-            if ($rta['msg'] === 'redireccionado') {
-                return redirect($rta['data']['redirect']);
-            }
+            $rta = $instanciaSDK->api_cerrarSesion($request->cookie('cdm-token'));
+            
             $request->cdm['status'] = $rta['status'];
             $request->cdm['msg'] = $rta['msg'];
-            $request->cdm['data']['autoriza'] = $rta;
+            $request->cdm['data']= array_merge($request->cdm['data'] ?? [],$rta );
 
+            if ($rta['status'] == 200) {
+                Cookie::queue('cdm-token', '', -1);
+                Cookie::queue('cdm-idSesion', '', -1);
+                Cookie::queue('cdm-idColeccion', '', -1);
+            }
+            
             return $next($request);
         } catch (\Throwable $th) {
             $request->cdm['status'] = 500;

@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Cdmisiones\Libcmd\ApiOperaciones;
 use Illuminate\Support\Facades\Log;
-use Cdmisiones\Libcmd\Middleware\CDMAutoriza;
+use Cdmisiones\Libcmd\Middleware\Autoriza;
 
-class CDMVerificaSesionToken
+class VerificaSesionToken
 {
     public function handle(Request $request, Closure $next): Response
     {
@@ -19,7 +19,7 @@ class CDMVerificaSesionToken
             if($request->cookie('cdm-token')){
                 $rta = $instanciaSDK->api_verificaSesionToken($request->cookie("cdm-token"));
                 if($rta['status'] != 200){
-                    return app(CDMAutoriza::class)->handle($request, $next);
+                    return app(Autoriza::class)->handle($request, $next);
                 }
                 $request->cdm['status'] = $rta['status'];
                 $request->cdm['msg'] = $rta['msg'];
@@ -27,7 +27,7 @@ class CDMVerificaSesionToken
                 $request->cdm['data'] = array_merge($request->cdm['data'] ?? [],$rta);
                 return $next($request);
             }
-            return app(CDMAutoriza::class)->handle($request, $next);
+            return app(Autoriza::class)->handle($request, $next);
         } catch (\Throwable $th) {
             $request->cdm = 
                 [

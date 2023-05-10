@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 
 
-class CDMGetPerfil
+class GetPerfil
 {
     
     public function handle(Request $request, Closure $next): Response

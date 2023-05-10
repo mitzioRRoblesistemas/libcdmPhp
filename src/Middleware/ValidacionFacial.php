@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cookie;
-use Cdmisiones\Libcmd\Middleware\CDMAutoriza;
+use Cdmisiones\Libcmd\Middleware\Autoriza;
 use Cdmisiones\Libcmd\ApiOperaciones;
 
 
-class CDMValidacionFacial
+class ValidacionFacial
 {
     public function handle($request, Closure $next, $rutaError, $ventanaVida)
     {            
@@ -54,7 +54,7 @@ class CDMValidacionFacial
             if ($rta['inStatus'] == 922) {
                 return redirect($rutaError)->with('solicitud', $request->query('solicitud'));
             }
-            return app(CDMAutoriza::class)->handle($request, $next);
+            return app(Autoriza::class)->handle($request, $next);
             
         } catch (\Exception $exception) {
             return redirect($rutaError)->with('solicitud', $request->query('solicitud'));
